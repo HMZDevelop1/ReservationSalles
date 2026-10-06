@@ -18,10 +18,9 @@ namespace ReservationSalles.Pages
             if (query != null && query.ContainsKey("salle") && query["salle"] is Salle s)
             {
                 _salle = s;
-                NomLabel.Text = _salle.Nom;
+                NomSalleLabel.Text = _salle.Nom;
                 CapaciteLabel.Text = $"Capacité : {_salle.Capacite}";
                 LocalisationLabel.Text = $"Localisation : {_salle.Localisation}";
-                DisponibiliteLabel.Text = _salle.Disponible ? "Disponible" : "Indisponible";
                 EquipementsLabel.Text = $"Équipements : {_salle.Equipements}";
                 if (!string.IsNullOrEmpty(_salle.Image))
                     SalleImage.Source = _salle.Image;
@@ -32,13 +31,20 @@ namespace ReservationSalles.Pages
         {
             if (_salle != null && _salle.Disponible)
             {
-                // Ouvrir la page de réservation en passant la salle
-                var parameters = new System.Collections.Generic.Dictionary<string, object>{{"salle", _salle}};
+                var parameters = new System.Collections.Generic.Dictionary<string, object> {{ "salle", _salle }};
                 await Shell.Current.GoToAsync("reservation", parameters);
             }
             else
             {
                 await DisplayAlert("Info", "La salle n'est pas disponible.", "OK");
+            }
+        }
+
+        private async void OnRetourClicked(object? sender, EventArgs e)
+        {
+            if (Navigation.NavigationStack.Count > 0)
+            {
+                await Navigation.PopAsync();
             }
         }
     }

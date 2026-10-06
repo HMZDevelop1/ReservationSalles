@@ -4,14 +4,15 @@
              x:Class="ReservationSalles.Pages.DetailSallePage"
              Title="Détail de la salle">
   <ScrollView>
-    <VerticalStackLayout Padding="20" Spacing="15">
-      <Image x:Name="SalleImage" HeightRequest="150" Aspect="AspectFill" />
-      <Label x:Name="NomLabel" FontSize="24" FontAttributes="Bold" />
-      <Label x:Name="CapaciteLabel" />
-      <Label x:Name="LocalisationLabel" />
-      <Label x:Name="DisponibiliteLabel" />
-      <Label x:Name="EquipementsLabel" />
-      <Button Text="Réserver" Clicked="OnReserverClicked" />
+    <VerticalStackLayout Padding="25" Spacing="20">
+      <Image x:Name="SalleImage" HeightRequest="200" Aspect="AspectFill" />
+      <Label x:Name="NomSalleLabel" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" />
+      <Label x:Name="CapaciteLabel" FontSize="18" />
+      <Label x:Name="LocalisationLabel" FontSize="18" />
+      <Label Text="Équipements" FontSize="22" FontAttributes="Bold" />
+      <Label x:Name="EquipementsLabel" FontSize="18" />
+      <Button Text="Réserver cette salle" Clicked="OnReserverClicked" />
+      <Button Text="Retour à la liste" Clicked="OnRetourClicked" />
     </VerticalStackLayout>
   </ScrollView>
 </ContentPage>
