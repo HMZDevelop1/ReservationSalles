@@ -1,1 +1,21 @@
-<?xml version="1.0" encoding="UTF-8" ?><Shellx:Class="TonProjet.AppShell"xmlns="http://schemas.microsoft.com/dotnet/2021/maui"xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"xmlns:pages="clr-namespace:TonProjet.Pages"Title="Réservation de salles"><ShellContentTitle="Accueil"ContentTemplate="{DataTemplate pages:DashboardPage}"Route="DashboardPage" /><ShellContentTitle="Salles"ContentTemplate="{DataTemplate pages:SallesPage}"Route="SallesPage" /><ShellContentTitle="Réservation"ContentTemplate="{DataTemplate pages:ReservationPage}"Route="ReservationPage" /></Shell>
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+	x:Class="ReservationSalles.AppShell"
+	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:pages="clr-namespace:ReservationSalles.Pages"
+	Title="Réservation de salles">
+
+  <FlyoutItem Title="Tableau de bord" FlyoutDisplayOptions="AsSingleItem">
+	<ShellContent Title="Tableau de bord" ContentTemplate="{DataTemplate pages:DashboardPage}" Route="dashboard" />
+  </FlyoutItem>
+
+  <FlyoutItem Title="Salles" FlyoutDisplayOptions="AsSingleItem">
+	<ShellContent Title="Salles" ContentTemplate="{DataTemplate pages:SallesPage}" Route="salles" />
+  </FlyoutItem>
+
+  <FlyoutItem Title="Réservation" FlyoutDisplayOptions="AsSingleItem">
+	<ShellContent Title="Réservation" ContentTemplate="{DataTemplate pages:ReservationPage}" Route="reservation" />
+  </FlyoutItem>
+
+</Shell>
