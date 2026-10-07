@@ -1,33 +1,71 @@
 using System;
+using System.Linq;
+using System.Collections.Generic;
 using Microsoft.Maui.Controls;
 using ReservationSalles.Models;
-using System.Collections.Generic;
 
-namespace ReservationSalles.Pages
+namespace ReservationSalles.Pages;
+
+public partial class SallesPage : ContentPage
 {
-    public partial class SallesPage : ContentPage
-    {
-        public SallesPage()
-        {
-            InitializeComponent();
-            SallesCollectionView.ItemsSource = ReservationData.Salles;
-        }
+    private List<Salle> salles;
 
-        private async void OnSalleSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    public SallesPage()
+    {
+        InitializeComponent();
+
+        salles = new List<Salle>
         {
-            if (e.CurrentSelection != null && e.CurrentSelection.Count > 0)
+            new Salle
             {
-                var selected = e.CurrentSelection[0] as Salle;
-                if (selected != null)
-                {
-                    // Navigation vers la page de détail en passant l'objet
-                    var parameters = new Dictionary<string, object>{{"salle", selected}};
-                    await Shell.Current.GoToAsync("DetailSallePage", parameters);
-                }
+                Nom = "Salle 201",
+                Capacite = 30,
+                Localisation = "Pavillon A",
+                Disponible = true,
+                Image = "salle.png",
+                Equipements = "Projecteur, ordinateurs, tableau blanc"
+            },
+
+            new Salle
+            {
+                Nom = "Salle 204",
+                Capacite = 25,
+                Localisation = "Pavillon A",
+                Disponible = true,
+                Image = "salle.png",
+                Equipements = "Projecteur, tableau blanc"
+            },
+
+            new Salle
+            {
+                Nom = "Laboratoire informatique",
+                Capacite = 20,
+                Localisation = "Pavillon B",
+                Disponible = true,
+                Image = "salle.png",
+                Equipements = "Ordinateurs, projecteur, tableau blanc"
             }
-            // Réinitialiser la sélection
-            if (sender is CollectionView cv)
-                cv.SelectedItem = null;
-        }
+        };
+
+        SallesCollectionView.ItemsSource = salles;
+    }
+
+    private async void OnSalleSelectionChanged(
+        object sender,
+        SelectionChangedEventArgs e)
+    {
+        var salle = e.CurrentSelection.FirstOrDefault() as Salle;
+
+        if (salle == null)
+            return;
+
+        await Shell.Current.GoToAsync(
+            nameof(DetailSallePage),
+            new Dictionary<string, object>
+            {
+                { "salle", salle }
+            });
+
+        SallesCollectionView.SelectedItem = null;
     }
 }
