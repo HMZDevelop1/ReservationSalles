@@ -13,7 +13,7 @@ namespace ReservationSalles.Pages
             SallesCollectionView.ItemsSource = ReservationData.Salles;
         }
 
-        private async void OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+        private async void OnSalleSelectionChanged(object? sender, SelectionChangedEventArgs e)
         {
             if (e.CurrentSelection != null && e.CurrentSelection.Count > 0)
             {
@@ -26,16 +26,8 @@ namespace ReservationSalles.Pages
                 }
             }
             // Réinitialiser la sélection
-            ((CollectionView)sender).SelectedItem = null;
-        }
-
-        private async void OnDetailsClicked(object? sender, EventArgs e)
-        {
-            if (sender is Button btn && btn.CommandParameter is Salle s)
-            {
-                var parameters = new Dictionary<string, object>{{"salle", s}};
-                await Shell.Current.GoToAsync("DetailSallePage", parameters);
-            }
+            if (sender is CollectionView cv)
+                cv.SelectedItem = null;
         }
     }
 }

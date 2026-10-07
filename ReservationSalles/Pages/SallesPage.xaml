@@ -2,20 +2,24 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ReservationSalles.Pages.SallesPage"
-             Title="Salles">
-  <CollectionView x:Name="SallesCollectionView" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
-    <CollectionView.ItemTemplate>
-      <DataTemplate>
-        <Frame Margin="10" Padding="10" CornerRadius="8" HasShadow="True">
-          <Grid ColumnDefinitions="80, *" RowDefinitions="Auto,Auto">
-            <Image Grid.RowSpan="2" Grid.Column="0" Source="dotnet_bot.png" Aspect="AspectFill" WidthRequest="70" HeightRequest="70" />
-            <Label Grid.Column="1" Text="{Binding Nom}" FontAttributes="Bold" FontSize="16" />
-            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Capacite, StringFormat='Capacité : {0}'}" FontSize="14" />
-            <Label Grid.Row="1" Grid.Column="1" HorizontalOptions="End" Text="{Binding Localisation}" FontSize="12" />
-            <Button Grid.Row="0" Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" Text="Détails" Clicked="OnDetailsClicked" CommandParameter="{Binding .}" />
-          </Grid>
-        </Frame>
-      </DataTemplate>
-    </CollectionView.ItemTemplate>
-  </CollectionView>
+             Title="Liste des salles">
+  <Grid RowDefinitions="Auto,*">
+    <Label Grid.Row="0" Text="Salles disponibles" FontSize="28" FontAttributes="Bold" Padding="20" HorizontalOptions="Center" />
+
+    <CollectionView Grid.Row="1" x:Name="SallesCollectionView" SelectionMode="Single" SelectionChanged="OnSalleSelectionChanged">
+      <CollectionView.ItemTemplate>
+        <DataTemplate>
+          <Border Margin="15,8" Padding="15" StrokeShape="RoundRectangle 15">
+            <Grid ColumnDefinitions="100,*" RowDefinitions="Auto,Auto,Auto,Auto">
+              <Image Grid.RowSpan="4" Grid.Column="0" Source="{Binding Image}" Aspect="AspectFill" HeightRequest="90" WidthRequest="90" />
+              <Label Grid.Row="0" Grid.Column="1" Text="{Binding Nom}" FontSize="20" FontAttributes="Bold" />
+              <Label Grid.Row="1" Grid.Column="1" Text="{Binding Capacite, StringFormat='Capacité : {0} personnes'}" FontSize="15" />
+              <Label Grid.Row="2" Grid.Column="1" Text="{Binding Localisation, StringFormat='Localisation : {0}'}" FontSize="15" />
+              <Label Grid.Row="3" Grid.Column="1" Text="{Binding Disponible, StringFormat='Disponible : {0}'}" FontSize="15" />
+            </Grid>
+          </Border>
+        </DataTemplate>
+      </CollectionView.ItemTemplate>
+    </CollectionView>
+  </Grid>
 </ContentPage>
