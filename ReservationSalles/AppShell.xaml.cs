@@ -1,14 +1,11 @@
-﻿using Microsoft.Maui.Controls;
-
-namespace ReservationSalles
-{
-    public partial class AppShell : Shell
+namespace TonProjet;
+public partial class AppShell : Shell{
+    public AppShell()
     {
-        public AppShell()
-        {
-            InitializeComponent();
-            // Enregistrer la route pour la page de détail
-            Routing.RegisterRoute("DetailSallePage", typeof(Pages.DetailSallePage));
-        }
+        InitializeComponent();
+
+        Routing.RegisterRoute(
+            nameof(Pages.DetailSallePage),
+            typeof(Pages.DetailSallePage));
     }
 }
