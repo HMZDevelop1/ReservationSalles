@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ReservationSalles.Pages.ReservationPage"
+             Title="Réservation">
+  <ScrollView>
+    <VerticalStackLayout Padding="20" Spacing="12">
+      <Label Text="Confirmer la réservation" FontSize="20" FontAttributes="Bold" />
+
+      <Label Text="Votre nom" />
+      <Entry x:Name="NomEntrant" Placeholder="Entrez votre nom" />
+
+      <Label Text="Choisir une salle" />
+      <Picker x:Name="SallePicker" ItemDisplayBinding="{Binding Nom}" Title="Sélectionner une salle" />
+
+      <Label Text="Date" />
+      <DatePicker x:Name="DatePicker" />
+
+      <Label Text="Plage horaire" />
+      <Picker x:Name="HorairePicker" Title="Sélectionner une plage horaire">
+        <Picker.Items>
+          <x:String>08:00 - 10:00</x:String>
+          <x:String>10:30 - 12:30</x:String>
+          <x:String>13:30 - 15:30</x:String>
+        </Picker.Items>
+      </Picker>
+
+      <Label x:Name="MessageValidation" TextColor="Red" IsVisible="False" />
+
+      <Button Text="Confirmer la réservation" Clicked="OnConfirmerClicked" />
+      <Button Text="Annuler" Clicked="OnAnnulerClicked" />
+    </VerticalStackLayout>
+  </ScrollView>
+</ContentPage>

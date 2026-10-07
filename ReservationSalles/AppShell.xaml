@@ -4,11 +4,20 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:ReservationSalles"
+    xmlns:pages="clr-namespace:ReservationSalles.Pages"
     Title="ReservationSalles">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+  <!-- Menu principal -->
+  <FlyoutItem Title="Tableau de bord" FlyoutDisplayOptions="AsSingleItem">
+    <ShellContent Title="Tableau de bord" ContentTemplate="{DataTemplate pages:DashboardPage}" Route="dashboard" />
+  </FlyoutItem>
+
+  <FlyoutItem Title="Salles" FlyoutDisplayOptions="AsSingleItem">
+    <ShellContent Title="Salles" ContentTemplate="{DataTemplate pages:SallesPage}" Route="salles" />
+  </FlyoutItem>
+
+  <FlyoutItem Title="Réservation" FlyoutDisplayOptions="AsSingleItem">
+    <ShellContent Title="Réservation" ContentTemplate="{DataTemplate pages:ReservationPage}" Route="reservation" />
+  </FlyoutItem>
 
 </Shell>

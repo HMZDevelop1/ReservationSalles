@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ReservationSalles.Pages.SallesPage"
+             Title="Salles">
+  <CollectionView x:Name="SallesCollectionView" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
+    <CollectionView.ItemTemplate>
+      <DataTemplate>
+        <Frame Margin="10" Padding="10" CornerRadius="8" HasShadow="True">
+          <Grid ColumnDefinitions="80, *" RowDefinitions="Auto,Auto">
+            <Image Grid.RowSpan="2" Grid.Column="0" Source="dotnet_bot.png" Aspect="AspectFill" WidthRequest="70" HeightRequest="70" />
+            <Label Grid.Column="1" Text="{Binding Nom}" FontAttributes="Bold" FontSize="16" />
+            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Capacite, StringFormat='Capacité : {0}'}" FontSize="14" />
+            <Label Grid.Row="1" Grid.Column="1" HorizontalOptions="End" Text="{Binding Localisation}" FontSize="12" />
+            <Button Grid.Row="0" Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" Text="Détails" Clicked="OnDetailsClicked" CommandParameter="{Binding .}" />
+          </Grid>
+        </Frame>
+      </DataTemplate>
+    </CollectionView.ItemTemplate>
+  </CollectionView>
+</ContentPage>
