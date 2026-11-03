@@ -22,33 +22,6 @@ simulées directement dans le code (`Salle.cs`).
 | 3 | Détail d'une salle | Informations détaillées, capacité, équipements, retour à la liste | Label, Image, Button |
 | 4 | Réservation | Nom, date, plage horaire, salle, validation simple | Entry, DatePicker, Picker, Button |
 
-## Maquette
-Voir le dossier [`Maquette/`](Maquette/).
-
-## Captures d'écran
-_À compléter avec les images du dossier `Captures/`._
-
-## Technologies
-- .NET MAUI et XAML
-- Visual Studio 2022
-- Git et GitHub
-
-## Structure du dépôt
-```
-ReservationSalles/                (racine du dépôt)
-├── README.md
-├── .gitignore
-├── Maquette/                     maquette des 4 écrans (PDF et PNG)
-├── Captures/                     captures d'écran de l'application
-└── ReservationSalles/            projet .NET MAUI
-    ├── Pages/                    DashboardPage, ListeSallesPage,
-    │                             DetailSallePage, ReservationPage
-    ├── Resources/Images/         salle.png
-    ├── App.xaml                  styles et ressources partagés
-    ├── AppShell.xaml             menu de navigation
-    ├── Salle.cs                  classe Salle et données simulées
-    └── MainPage.xaml             page d'exemple du modèle MAUI (non utilisée)
-```
 
 ## Fonctionnalités
 - **Navigation** : menu hamburger (Shell) et boutons entre les écrans.
@@ -58,16 +31,3 @@ ReservationSalles/                (racine du dépôt)
 - **Règles simples** : une salle occupée ne peut pas être réservée ; la date ne peut pas
   être dans le passé.
 - **Ergonomie** : styles et couleurs partagés, textes lisibles, boutons cohérents.
-
-## Guide d'exécution
-1. Installer Visual Studio 2022 avec la charge de travail
-   **Développement d'applications mobiles avec .NET (MAUI)**.
-2. Cloner le dépôt : `git clone https://github.com/HMZDevelop1/ReservationSalles.git`
-3. Ouvrir le fichier `.sln` dans Visual Studio.
-4. Activer le mode développeur de Windows (Paramètres > Confidentialité et sécurité > Pour les développeurs).
-5. Choisir **Windows Machine** comme cible, puis appuyer sur **F5**.
-
-## Avancement
-- [x] Semaine 1 : mise en place du projet
-- [ ] Semaine 2 : pages, menu, tableau de bord, liste des salles
-- [ ] Semaine 3 : détail, réservation, validation, finalisation
