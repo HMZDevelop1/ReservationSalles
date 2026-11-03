@@ -1,26 +1,46 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentPage x:Class="ReservationSalles.Pages.DashboardPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ReservationSalles.Pages.DashboardPage"
-             Title="Tableau de bord">
-  <ScrollView>
-    <VerticalStackLayout Padding="30" Spacing="25">
-      <Label Text="Réservation de salles" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" />
-      <Label Text="Tableau de bord" FontSize="22" HorizontalOptions="Center" />
-      <Border Padding="20" StrokeShape="RoundRectangle 15">
-        <VerticalStackLayout Spacing="10">
-          <Label Text="Salles disponibles" FontSize="18" HorizontalOptions="Center" />
-          <Label Text="3" FontSize="40" FontAttributes="Bold" HorizontalOptions="Center" />
+             Title="Tableau de bord"
+             BackgroundColor="{StaticResource CouleurFond}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+
+            <Label Text="Réservation de salles" Style="{StaticResource TitrePage}"
+                   HorizontalOptions="Center" />
+            <Label Text="Bienvenue ! Consultez les salles et réservez en quelques clics."
+                   Style="{StaticResource TexteNormal}" HorizontalTextAlignment="Center" />
+
+            <!-- Deux cartes côte à côte -->
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Border Grid.Column="0" Style="{StaticResource Carte}">
+                    <VerticalStackLayout Spacing="4">
+                        <Label x:Name="labelNbSalles" Text="0" FontSize="40" FontAttributes="Bold"
+                               TextColor="{StaticResource CouleurPrincipale}" HorizontalOptions="Center" />
+                        <Label Text="Salles disponibles" Style="{StaticResource TexteNormal}"
+                               HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Grid.Column="1" Style="{StaticResource Carte}">
+                    <VerticalStackLayout Spacing="4">
+                        <Label x:Name="labelNbReservations" Text="0" FontSize="40" FontAttributes="Bold"
+                               TextColor="{StaticResource CouleurPrincipale}" HorizontalOptions="Center" />
+                        <Label Text="Réservations" Style="{StaticResource TexteNormal}"
+                               HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <!-- Menu de navigation rapide -->
+            <Label Text="Navigation" FontSize="20" FontAttributes="Bold"
+                   TextColor="{StaticResource CouleurTexte}" />
+            <Button Text="Voir la liste des salles" Style="{StaticResource BoutonPrincipal}"
+                    Clicked="OnListeClicked" />
+            <Button Text="Réserver une salle" Style="{StaticResource BoutonSecondaire}"
+                    Clicked="OnReserverClicked" />
         </VerticalStackLayout>
-      </Border>
-      <Border Padding="20" StrokeShape="RoundRectangle 15">
-        <VerticalStackLayout Spacing="10">
-          <Label Text="Réservations simulées" FontSize="18" HorizontalOptions="Center" />
-          <Label Text="2" FontSize="40" FontAttributes="Bold" HorizontalOptions="Center" />
-        </VerticalStackLayout>
-      </Border>
-      <Button Text="Voir les salles" Clicked="OnVoirSallesClicked" />
-      <Button Text="Faire une réservation" Clicked="OnReservationClicked" />
-    </VerticalStackLayout>
-  </ScrollView>
+    </ScrollView>
 </ContentPage>

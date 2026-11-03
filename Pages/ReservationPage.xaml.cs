@@ -1,71 +1,62 @@
-using TonProjet.Models;
-namespace TonProjet.Pages;
+namespace ReservationSalles.Pages;
 
-[QueryProperty(nameof(Salle), "Salle")]public partial class ReservationPage : ContentPage{
-    private Salle salle;
-
-    public Salle Salle    {
-        get => salle;
-        set        {
-            salle = value;
-
-            if (salle != null && SallePicker != null)
-            {
-                SallePicker.SelectedItem = salle.Nom;
-            }
-        }
-    }
-
+[QueryProperty(nameof(SalleId), "salleId")]
+public partial class ReservationPage : ContentPage
+{
     public ReservationPage()
     {
         InitializeComponent();
 
-        DatePickerReservation.MinimumDate = DateTime.Today;
-        DatePickerReservation.Date = DateTime.Today;
+        // Salles disponibles seulement
+        pickerSalle.ItemsSource = Salle.ListeSalles.Where(s => s.EstDisponible).ToList();
+
+        // On ne peut pas réserver dans le passé
+        datePicker.MinimumDate = DateTime.Today;
+        datePicker.Date = DateTime.Today;
+    }
+
+    // Si on arrive depuis la page détail, la salle est déjà choisie
+    public string SalleId
+    {
+        set
+        {
+            int id = int.Parse(value);
+            Salle? salle = Salle.ListeSalles.FirstOrDefault(s => s.Id == id);
+            pickerSalle.SelectedItem = salle;
+        }
     }
 
     private async void OnConfirmerClicked(object sender, EventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(NomEntry.Text))
-        {
-            await DisplayAlert(
-                "Erreur",
-                "Veuillez entrer votre nom.",
-                "OK");
+        // Validation simple : on vérifie chaque champ
+        bool nomOk = !string.IsNullOrWhiteSpace(entryNom.Text);
+        bool salleOk = pickerSalle.SelectedItem != null;
+        bool horaireOk = pickerHoraire.SelectedItem != null;
 
-            return;
+        erreurNom.IsVisible = !nomOk;
+        erreurSalle.IsVisible = !salleOk;
+        erreurHoraire.IsVisible = !horaireOk;
+
+        if (!nomOk || !salleOk || !horaireOk)
+        {
+            return;   // on s'arrête : il y a des erreurs
         }
 
-        if (HorairePicker.SelectedIndex == -1)
-        {
-            await DisplayAlert(
-                "Erreur",
-                "Veuillez choisir une plage horaire.",
-                "OK");
+        Salle salle = (Salle)pickerSalle.SelectedItem;
+        string horaire = (string)pickerHoraire.SelectedItem;
 
-            return;
-        }
+        Salle.NombreReservations++;
 
-        if (SallePicker.SelectedIndex == -1)
-        {
-            await DisplayAlert(
-                "Erreur",
-                "Veuillez choisir une salle.",
-                "OK");
-
-            return;
-        }
-
-        await DisplayAlert(
-            "Réservation confirmée",
-            $"Réservation de {SallePicker.SelectedItem} pour {NomEntry.Text}.",
+        await DisplayAlert("Réservation confirmée",
+            $"Merci {entryNom.Text.Trim()} !\n{salle.Nom}\n{datePicker.Date:dd/MM/yyyy}\n{horaire}",
             "OK");
 
-        await Shell.Current.GoToAsync("//DashboardPage");
-    }
+        // On vide le formulaire (rien n'est sauvegardé)
+        entryNom.Text = "";
+        pickerSalle.SelectedItem = null;
+        pickerHoraire.SelectedItem = null;
+        datePicker.Date = DateTime.Today;
 
-    private async void OnAnnulerClicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("..");
+        await Shell.Current.GoToAsync("//DashboardPage");
     }
 }

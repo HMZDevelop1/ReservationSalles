@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="ReservationSalles.Pages.ReservationPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Réservation"
+             BackgroundColor="{StaticResource CouleurFond}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="8">
+
+            <Label Text="Réserver une salle" Style="{StaticResource TitrePage}" />
+
+            <!-- Nom -->
+            <Label Text="Votre nom" Style="{StaticResource TexteNormal}" />
+            <Entry x:Name="entryNom" Placeholder="Ex. : Marie Tremblay" />
+            <Label x:Name="erreurNom" Text="Veuillez entrer votre nom." Style="{StaticResource MessageErreur}" />
+
+            <!-- Salle -->
+            <Label Text="Salle" Style="{StaticResource TexteNormal}" />
+            <Picker x:Name="pickerSalle" Title="Choisir une salle" ItemDisplayBinding="{Binding Nom}" />
+            <Label x:Name="erreurSalle" Text="Veuillez choisir une salle." Style="{StaticResource MessageErreur}" />
+
+            <!-- Date -->
+            <Label Text="Date de réservation" Style="{StaticResource TexteNormal}" />
+            <DatePicker x:Name="datePicker" />
+
+            <!-- Plage horaire -->
+            <Label Text="Plage horaire" Style="{StaticResource TexteNormal}" />
+            <Picker x:Name="pickerHoraire" Title="Choisir une plage horaire">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>08:00 - 10:00</x:String>
+                        <x:String>10:00 - 12:00</x:String>
+                        <x:String>13:00 - 15:00</x:String>
+                        <x:String>15:00 - 17:00</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <Label x:Name="erreurHoraire" Text="Veuillez choisir une plage horaire." Style="{StaticResource MessageErreur}" />
+
+            <Button Text="Confirmer la réservation" Style="{StaticResource BoutonPrincipal}"
+                    Margin="0,16,0,0" Clicked="OnConfirmerClicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

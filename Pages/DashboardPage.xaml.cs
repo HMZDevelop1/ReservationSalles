@@ -1,23 +1,29 @@
-using System;
-using Microsoft.Maui.Controls;
+namespace ReservationSalles.Pages;
 
-namespace ReservationSalles.Pages
+public partial class DashboardPage : ContentPage
 {
-    public partial class DashboardPage : ContentPage
+    public DashboardPage()
     {
-        public DashboardPage()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        private void OnVoirSallesClicked(object sender, EventArgs e)
-        {
-            // TODO: naviguer vers la page des salles
-        }
+    // Appelé chaque fois que la page s'affiche : les chiffres sont toujours à jour
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
 
-        private void OnReservationClicked(object sender, EventArgs e)
-        {
-            // TODO: naviguer vers la page de réservation
-        }
+        int nbDisponibles = Salle.ListeSalles.Count(s => s.EstDisponible);
+        labelNbSalles.Text = nbDisponibles.ToString();
+        labelNbReservations.Text = Salle.NombreReservations.ToString();
+    }
+
+    private async void OnListeClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//ListeSallesPage");
+    }
+
+    private async void OnReserverClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//ReservationPage");
     }
 }
