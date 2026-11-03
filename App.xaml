@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application x:Class="ReservationSalles.App"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ReservationSalles">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- ===== Ressources partagées par toute l'application ===== -->
+            <Color x:Key="CouleurPrincipale">#2E5AAC</Color>
+            <Color x:Key="CouleurFond">#F4F6FA</Color>
+            <Color x:Key="CouleurTexte">#222222</Color>
+
+            <!-- Titre de page -->
+            <Style x:Key="TitrePage" TargetType="Label">
+                <Setter Property="FontSize" Value="26" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="{StaticResource CouleurPrincipale}" />
+            </Style>
+
+            <!-- Texte normal -->
+            <Style x:Key="TexteNormal" TargetType="Label">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="TextColor" Value="{StaticResource CouleurTexte}" />
+            </Style>
+
+            <!-- Boutons -->
+            <Style x:Key="BoutonPrincipal" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource CouleurPrincipale}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="HeightRequest" Value="48" />
+            </Style>
+
+            <Style x:Key="BoutonSecondaire" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#DDE3F0" />
+                <Setter Property="TextColor" Value="{StaticResource CouleurPrincipale}" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="HeightRequest" Value="48" />
+            </Style>
+
+            <!-- Carte blanche (pour les salles et le tableau de bord) -->
+            <Style x:Key="Carte" TargetType="Border">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="Stroke" Value="#D0D6E2" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+                <Setter Property="Padding" Value="12" />
+            </Style>
+
+            <!-- Messages d'erreur du formulaire -->
+            <Style x:Key="MessageErreur" TargetType="Label">
+                <Setter Property="TextColor" Value="Red" />
+                <Setter Property="FontSize" Value="13" />
+                <Setter Property="IsVisible" Value="False" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
