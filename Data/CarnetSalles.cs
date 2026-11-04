@@ -42,7 +42,7 @@ public class CarnetSalles
                 Capacite = 50,
                 Localisation = "Bâtiment A - 3ème étage",
                 EstDisponible = true,
-                Equipements = "Projecteur, Tableau blanc, Système audio"
+                Equipements = new List<string> { "Projecteur", "Tableau blanc", "Système audio" }
             },
             new Salle
             {
@@ -51,7 +51,7 @@ public class CarnetSalles
                 Capacite = 20,
                 Localisation = "Bâtiment B - 2ème étage",
                 EstDisponible = true,
-                Equipements = "Table de conférence, Écran TV 55\""
+                Equipements = new List<string> { "Table de conférence", "Écran TV 55\"" }
             },
             new Salle
             {
@@ -60,7 +60,7 @@ public class CarnetSalles
                 Capacite = 150,
                 Localisation = "Bâtiment C - 1er étage",
                 EstDisponible = false,
-                Equipements = "Projecteur 4K, Système sonore professionnel, Estrade, Éclairage LED"
+                Equipements = new List<string> { "Projecteur 4K", "Système sonore professionnel", "Estrade", "Éclairage LED" }
             },
             new Salle
             {
@@ -69,7 +69,7 @@ public class CarnetSalles
                 Capacite = 30,
                 Localisation = "Bâtiment A - 1er étage",
                 EstDisponible = true,
-                Equipements = "15 Ordinateurs, Réseau haute vitesse, Tableau interactif"
+                Equipements = new List<string> { "15 Ordinateurs", "Réseau haute vitesse", "Tableau interactif" }
             },
             new Salle
             {
@@ -78,7 +78,7 @@ public class CarnetSalles
                 Capacite = 40,
                 Localisation = "Bâtiment D - Rez-de-chaussée",
                 EstDisponible = true,
-                Equipements = "Établis, Outils de travail, Rangements"
+                Equipements = new List<string> { "Établis", "Outils de travail", "Rangements" }
             }
         };
 
