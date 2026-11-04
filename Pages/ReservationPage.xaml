@@ -11,7 +11,6 @@
 
             <Label Text="Réserver une salle" Style="{StaticResource TitrePage}" />
 
-            <!-- Salle reçue en paramètre depuis la page de détail -->
             <Border Style="{StaticResource Carte}">
                 <VerticalStackLayout>
                     <Label Text="Salle choisie" FontSize="13" TextColor="Gray" />
@@ -20,28 +19,26 @@
                 </VerticalStackLayout>
             </Border>
 
-            <!-- Nom -->
             <Label Text="Votre nom" Style="{StaticResource TexteNormal}" Margin="0,8,0,0" />
             <Entry Placeholder="Ex. : Marie Tremblay" Text="{Binding NomUtilisateur}" />
 
-            <!-- Date -->
             <Label Text="Date de réservation" Style="{StaticResource TexteNormal}" />
             <DatePicker Date="{Binding DateReservation}"
                         MinimumDate="{x:Static system:DateTime.Today}" />
 
-            <!-- Plage horaire -->
             <Label Text="Plage horaire" Style="{StaticResource TexteNormal}" />
-            <Picker Title="Choisir une plage horaire"
-                    ItemsSource="{Binding PlagesHoraires}"
-                    SelectedItem="{Binding PlageHoraire}" />
+            <Picker x:Name="pickerHoraire"
+                    Title="Choisir une plage horaire"
+                    SelectedIndexChanged="OnPlageChoisie" />
 
-            <!-- Message de validation -->
+            <!-- Confirme que le choix est bien reçu par le ViewModel -->
+            <Label Text="{Binding PlageHoraire, StringFormat='Plage choisie : {0}'}"
+                   FontSize="14" TextColor="Gray" />
+
             <Label Text="{Binding MessageErreur}" Style="{StaticResource MessageErreur}" />
 
             <Button Text="Confirmer la réservation" Style="{StaticResource BoutonPrincipal}"
                     Margin="0,12,0,0" Command="{Binding ConfirmerCommand}" />
-            <Label Text="Entrez votre nom pour activer le bouton."
-                   FontSize="13" TextColor="Gray" HorizontalOptions="Center" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
