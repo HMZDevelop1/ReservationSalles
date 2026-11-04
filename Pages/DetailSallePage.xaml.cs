@@ -39,7 +39,7 @@ public partial class DetailSallePage : ContentPage
         labelDescription.Text = salle.Description;
         labelCapacite.Text = salle.TexteCapacite;
         labelLocalisation.Text = salle.Localisation;
-        labelEquipements.Text = salle.Equipements;
+        labelEquipements.Text = string.Join(", ", salle.Equipements);
 
         // On ne peut pas réserver une salle occupée
         boutonReserver.IsEnabled = salle.EstDisponible;

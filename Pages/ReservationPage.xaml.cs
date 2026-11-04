@@ -49,8 +49,6 @@ public partial class ReservationPage : ContentPage
         Salle salle = (Salle)pickerSalle.SelectedItem;
         string horaire = (string)pickerHoraire.SelectedItem;
 
-        Salle.NombreReservations++;
-
         await DisplayAlert("Réservation confirmée",
             $"Merci {entryNom.Text.Trim()} !\n{salle.Nom}\n{datePicker.Date:dd/MM/yyyy}\n{horaire}",
             "OK");
