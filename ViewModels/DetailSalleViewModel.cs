@@ -13,9 +13,6 @@ public class DetailSalleViewModel : ViewModelBase
     private readonly CarnetSalles _carnetSalles;
     private Salle? _salle;
 
-    /// <summary>
-    /// La salle dont on affiche les détails
-    /// </summary>
     public Salle? Salle
     {
         get => _salle;
@@ -29,9 +26,6 @@ public class DetailSalleViewModel : ViewModelBase
         }
     }
 
-    /// <summary>
-    /// Texte concaténé des équipements (formaté pour l'affichage)
-    /// </summary>
     public string EquipementsText
     {
         get
@@ -44,32 +38,20 @@ public class DetailSalleViewModel : ViewModelBase
     }
 
     public int SalleId => Salle?.Id ?? 0;
-
     public string NomSalle => Salle?.Nom ?? string.Empty;
 
-    /// <summary>
-    /// Commande pour réserver la salle
-    /// </summary>
     public RelaisCommande ReserverCommand { get; }
 
-    /// <summary>
-    /// Constructeur qui injecte le service CarnetSalles
-    /// </summary>
-    /// <param name="carnetSalles">Service de gestion des salles et réservations</param>
     public DetailSalleViewModel(CarnetSalles carnetSalles)
     {
         _carnetSalles = carnetSalles ?? throw new ArgumentNullException(nameof(carnetSalles));
 
-        // Initialiser la commande
         ReserverCommand = new RelaisCommande(
             execute: _ => ExecuterReserver(),
             canExecute: _ => Salle is not null
         );
     }
 
-    /// <summary>
-    /// Navigue vers la page de réservation en passant les infos de la salle
-    /// </summary>
     private async void ExecuterReserver()
     {
         if (Salle is null)
@@ -91,3 +73,4 @@ public class DetailSalleViewModel : ViewModelBase
         }
     }
 }
+

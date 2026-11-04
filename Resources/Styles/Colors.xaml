@@ -38,7 +38,6 @@
         <Setter Property="Padding" Value="12,10" />
     </Style>
 
-    <!-- Styles par défaut de la solution -->
     <Color x:Key="Primary">#512BD4</Color>
     <Color x:Key="PrimaryDark">#ac99ea</Color>
     <Color x:Key="PrimaryDarkText">#242424</Color>

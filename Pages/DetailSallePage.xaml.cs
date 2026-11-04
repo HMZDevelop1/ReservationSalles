@@ -27,7 +27,8 @@ public partial class DetailSallePage : ContentPage
 
     private void AfficherSalle()
     {
-        Salle? salle = Salle.ListeSalles.FirstOrDefault(s => s.Id == idSalle);
+        var carnet = new CarnetSalles();
+        Salle? salle = carnet.Salles.FirstOrDefault(s => s.Id == idSalle);
         if (salle == null)
         {
             return;
@@ -41,7 +42,6 @@ public partial class DetailSallePage : ContentPage
         labelLocalisation.Text = salle.Localisation;
         labelEquipements.Text = string.Join(", ", salle.Equipements);
 
-        // On ne peut pas réserver une salle occupée
         boutonReserver.IsEnabled = salle.EstDisponible;
     }
 

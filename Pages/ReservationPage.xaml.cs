@@ -11,21 +11,20 @@ public partial class ReservationPage : ContentPage
     {
         InitializeComponent();
 
-        // Salles disponibles seulement
-        pickerSalle.ItemsSource = Salle.ListeSalles.Where(s => s.EstDisponible).ToList();
+        var carnet = new CarnetSalles();
+        pickerSalle.ItemsSource = carnet.Salles.Where(s => s.EstDisponible).ToList();
 
-        // On ne peut pas réserver dans le passé
         datePicker.MinimumDate = DateTime.Today;
         datePicker.Date = DateTime.Today;
     }
 
-    // Si on arrive depuis la page détail, la salle est déjà choisie
     public string SalleId
     {
         set
         {
             int id = int.Parse(value);
-            Salle? salle = Salle.ListeSalles.FirstOrDefault(s => s.Id == id);
+            var carnet = new CarnetSalles();
+            Salle? salle = carnet.Salles.FirstOrDefault(s => s.Id == id);
             pickerSalle.SelectedItem = salle;
         }
     }

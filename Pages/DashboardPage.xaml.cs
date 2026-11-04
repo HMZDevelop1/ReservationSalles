@@ -16,9 +16,10 @@ public partial class DashboardPage : ContentPage
     {
         base.OnAppearing();
 
-        int nbDisponibles = Salle.ListeSalles.Count(s => s.EstDisponible);
+        var carnet = new CarnetSalles();
+        int nbDisponibles = carnet.Salles.Count(s => s.EstDisponible);
         labelNbSalles.Text = nbDisponibles.ToString();
-        labelNbReservations.Text = new CarnetSalles().Reservations.Count.ToString();
+        labelNbReservations.Text = carnet.Reservations.Count.ToString();
     }
 
     private async void OnListeClicked(object sender, EventArgs e)

@@ -10,8 +10,8 @@ public partial class ListeSallesPage : ContentPage
     {
         InitializeComponent();
 
-        // On donne la liste de salles à la CollectionView
-        listeSalles.ItemsSource = Salle.ListeSalles;
+        var carnet = new CarnetSalles();
+        listeSalles.ItemsSource = carnet.Salles;
     }
 
     private async void OnDetailsClicked(object sender, EventArgs e)
