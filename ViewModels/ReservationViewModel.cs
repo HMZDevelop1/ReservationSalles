@@ -79,7 +79,19 @@ public class ReservationViewModel : ViewModelBase
     /// <summary>
     /// Liste des plages horaires disponibles pour réservation
     /// </summary>
-    public ObservableCollection<string> PlagesHoraires { get; }
+    public List<string> PlagesHoraires { get; } = new()
+    {
+        "08:00-09:00",
+        "09:00-10:00",
+        "10:00-11:00",
+        "11:00-12:00",
+        "12:00-13:00",
+        "13:00-14:00",
+        "14:00-15:00",
+        "15:00-16:00",
+        "16:00-17:00",
+        "17:00-18:00"
+    };
 
     /// <summary>
     /// Commande pour confirmer et créer la réservation
@@ -93,21 +105,6 @@ public class ReservationViewModel : ViewModelBase
     public ReservationViewModel(CarnetSalles carnetSalles)
     {
         _carnetSalles = carnetSalles ?? throw new ArgumentNullException(nameof(carnetSalles));
-
-        // Initialiser les plages horaires
-        PlagesHoraires = new ObservableCollection<string>
-        {
-            "08:00-09:00",
-            "09:00-10:00",
-            "10:00-11:00",
-            "11:00-12:00",
-            "12:00-13:00",
-            "13:00-14:00",
-            "14:00-15:00",
-            "15:00-16:00",
-            "16:00-17:00",
-            "17:00-18:00"
-        };
 
         // Initialiser la commande de confirmation
         ConfirmerCommand = new RelaisCommande(

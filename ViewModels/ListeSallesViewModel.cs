@@ -57,12 +57,15 @@ public class ListeSallesViewModel : ViewModelBase
 
         try
         {
-            // Navigation avec Shell - passer la salle en paramètre de query
-            await Shell.Current.GoToAsync($"detailsalle?salle={SalleSelectionnee.Id}");
+            await Shell.Current.GoToAsync(
+                "DetailSallePage",
+                new Dictionary<string, object>
+                {
+                    ["Salle"] = SalleSelectionnee
+                });
         }
         catch (Exception ex)
         {
-            // Log ou gestion d'erreur
             Console.WriteLine($"Erreur lors de la navigation: {ex.Message}");
         }
     }

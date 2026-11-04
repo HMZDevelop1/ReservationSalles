@@ -7,27 +7,11 @@ namespace ReservationSalles.ViewModels;
 /// ViewModel pour l'affichage des détails d'une salle
 /// Reçoit la salle via les paramètres de query et permet de réserver
 /// </summary>
-[QueryProperty(nameof(SalleId), "salle")]
+[QueryProperty(nameof(Salle), "Salle")]
 public class DetailSalleViewModel : ViewModelBase
 {
     private readonly CarnetSalles _carnetSalles;
-    private int _salleId;
     private Salle? _salle;
-
-    /// <summary>
-    /// Identifiant de la salle (reçu via QueryProperty)
-    /// </summary>
-    public int SalleId
-    {
-        get => _salleId;
-        set
-        {
-            if (SetProperty(ref _salleId, value))
-            {
-                ChargerSalle();
-            }
-        }
-    }
 
     /// <summary>
     /// La salle dont on affiche les détails
@@ -35,7 +19,14 @@ public class DetailSalleViewModel : ViewModelBase
     public Salle? Salle
     {
         get => _salle;
-        private set => SetProperty(ref _salle, value);
+        set
+        {
+            if (SetProperty(ref _salle, value))
+            {
+                OnPropertyChanged(nameof(EquipementsText));
+                ReserverCommand.RaiseCanExecuteChanged();
+            }
+        }
     }
 
     /// <summary>
@@ -45,12 +36,16 @@ public class DetailSalleViewModel : ViewModelBase
     {
         get
         {
-            if (Salle is null || string.IsNullOrWhiteSpace(Salle.Equipements))
+            if (Salle is null || Salle.Equipements == null || Salle.Equipements.Count == 0)
                 return "Aucun équipement";
 
-            return Salle.Equipements;
+            return string.Join(", ", Salle.Equipements);
         }
     }
+
+    public int SalleId => Salle?.Id ?? 0;
+
+    public string NomSalle => Salle?.Nom ?? string.Empty;
 
     /// <summary>
     /// Commande pour réserver la salle
@@ -73,16 +68,6 @@ public class DetailSalleViewModel : ViewModelBase
     }
 
     /// <summary>
-    /// Charge la salle depuis le CarnetSalles en utilisant SalleId
-    /// </summary>
-    private void ChargerSalle()
-    {
-        Salle = _carnetSalles.Salles.FirstOrDefault(s => s.Id == SalleId);
-        OnPropertyChanged(nameof(EquipementsText));
-        ReserverCommand.RaiseCanExecuteChanged();
-    }
-
-    /// <summary>
     /// Navigue vers la page de réservation en passant les infos de la salle
     /// </summary>
     private async void ExecuterReserver()
@@ -92,24 +77,17 @@ public class DetailSalleViewModel : ViewModelBase
 
         try
         {
-            // Navigation avec Shell - passer SalleId et NomSalle en paramètres
-            await Shell.Current.GoToAsync($"reservation?salleid={Salle.Id}&nomsalle={Uri.EscapeDataString(Salle.Nom)}");
+            await Shell.Current.GoToAsync(
+                "ReservationPage",
+                new Dictionary<string, object>
+                {
+                    ["SalleId"] = Salle.Id,
+                    ["NomSalle"] = Salle.Nom
+                });
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Erreur lors de la navigation vers réservation: {ex.Message}");
-        }
-    }
-
-    /// <summary>
-    /// Appelé quand le ViewModel est créé/réutilisé
-    /// Utile pour rafraîchir les données si nécessaire
-    /// </summary>
-    public void Actualiser()
-    {
-        if (SalleId > 0)
-        {
-            ChargerSalle();
         }
     }
 }
