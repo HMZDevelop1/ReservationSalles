@@ -5,13 +5,11 @@
        xmlns:pages="clr-namespace:ReservationSalles.Pages"
        Title="Réservation de salles"
        FlyoutBehavior="Flyout"
-       BackgroundColor="{AppThemeBinding Light={StaticResource CouleurPrincipale}, Dark=#0D1117}"
+       BackgroundColor="{StaticResource CouleurPrincipale}"
        Shell.ForegroundColor="White"
-       Shell.TitleColor="White"
-       Shell.TabBarBackgroundColor="{AppThemeBinding Light={StaticResource CouleurFondLight}, Dark=#0D1117}"
-       Shell.TabBarForegroundColor="{AppThemeBinding Light={StaticResource CouleurPrincipale}, Dark={StaticResource PrimaryDark}}"
-       Shell.TabBarUnselectedColor="{AppThemeBinding Light={StaticResource CouleurSecondaireLight}, Dark={StaticResource CouleurSecondaireDark}}">
+       Shell.TitleColor="White">
 
+    <!-- Menu de navigation (menu hamburger) -->
     <ShellContent Title="Tableau de bord"
                   Route="DashboardPage"
                   ContentTemplate="{DataTemplate pages:DashboardPage}" />
@@ -19,8 +17,4 @@
     <ShellContent Title="Liste des salles"
                   Route="ListeSallesPage"
                   ContentTemplate="{DataTemplate pages:ListeSallesPage}" />
-
-    <ShellContent Title="Réserver une salle"
-                  Route="ReservationPage"
-                  ContentTemplate="{DataTemplate pages:ReservationPage}" />
 </Shell>

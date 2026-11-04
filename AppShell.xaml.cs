@@ -8,8 +8,10 @@ public partial class AppShell : Shell
     {
         InitializeComponent();
 
-        // Page de détail : pas dans le menu, mais on enregistre sa route
-        // pour pouvoir y naviguer avec GoToAsync
+        // Pages hors menu : on enregistre leurs routes.
+        // Les noms doivent être identiques à ceux utilisés dans les ViewModels
+        // ("DetailSallePage" et "ReservationPage").
         Routing.RegisterRoute(nameof(DetailSallePage), typeof(DetailSallePage));
+        Routing.RegisterRoute(nameof(ReservationPage), typeof(ReservationPage));
     }
 }
