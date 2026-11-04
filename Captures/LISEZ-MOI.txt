@@ -1,6 +1,0 @@
-Placez ici les captures d'écran de l'application (PNG) :
-- 01_tableau_de_bord.png
-- 02_liste_des_salles.png
-- 03_detail_salle.png
-- 04_reservation.png
-Puis référencez-les dans le README.md
