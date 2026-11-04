@@ -1,3 +1,7 @@
+using ReservationSalles.Models;
+using ReservationSalles.Data;
+using ReservationSalles.ViewModels;
+
 namespace ReservationSalles.Pages;
 
 public partial class ListeSallesPage : ContentPage

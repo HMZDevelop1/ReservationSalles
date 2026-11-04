@@ -1,4 +1,4 @@
-namespace ReservationSalles;
+namespace ReservationSalles.Models;
 
 // Une salle, avec ses données simulées directement dans le code
 public class Salle

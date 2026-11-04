@@ -1,3 +1,7 @@
+using ReservationSalles.Models;
+using ReservationSalles.Data;
+using ReservationSalles.ViewModels;
+
 namespace ReservationSalles.Pages;
 
 // Le paramètre "salleId" de la navigation va dans la propriété SalleId
