@@ -1,6 +1,6 @@
-using System.Collections.ObjectModel;
 using ReservationSalles.Data;
 using ReservationSalles.Models;
+using System.Collections.ObjectModel;
 
 namespace ReservationSalles.ViewModels;
 
