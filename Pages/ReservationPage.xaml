@@ -2,6 +2,7 @@
 <ContentPage x:Class="ReservationSalles.Pages.ReservationPage"
              xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
              Title="Réservation"
              BackgroundColor="{StaticResource CouleurFond}">
 
@@ -10,36 +11,37 @@
 
             <Label Text="Réserver une salle" Style="{StaticResource TitrePage}" />
 
-            <!-- Nom -->
-            <Label Text="Votre nom" Style="{StaticResource TexteNormal}" />
-            <Entry x:Name="entryNom" Placeholder="Ex. : Marie Tremblay" />
-            <Label x:Name="erreurNom" Text="Veuillez entrer votre nom." Style="{StaticResource MessageErreur}" />
+            <!-- Salle reçue en paramètre depuis la page de détail -->
+            <Border Style="{StaticResource Carte}">
+                <VerticalStackLayout>
+                    <Label Text="Salle choisie" FontSize="13" TextColor="Gray" />
+                    <Label Text="{Binding NomSalle}" FontSize="20" FontAttributes="Bold"
+                           TextColor="{StaticResource CouleurPrincipale}" />
+                </VerticalStackLayout>
+            </Border>
 
-            <!-- Salle -->
-            <Label Text="Salle" Style="{StaticResource TexteNormal}" />
-            <Picker x:Name="pickerSalle" Title="Choisir une salle" ItemDisplayBinding="{Binding Nom}" />
-            <Label x:Name="erreurSalle" Text="Veuillez choisir une salle." Style="{StaticResource MessageErreur}" />
+            <!-- Nom -->
+            <Label Text="Votre nom" Style="{StaticResource TexteNormal}" Margin="0,8,0,0" />
+            <Entry Placeholder="Ex. : Marie Tremblay" Text="{Binding NomUtilisateur}" />
 
             <!-- Date -->
             <Label Text="Date de réservation" Style="{StaticResource TexteNormal}" />
-            <DatePicker x:Name="datePicker" />
+            <DatePicker Date="{Binding DateReservation}"
+                        MinimumDate="{x:Static system:DateTime.Today}" />
 
             <!-- Plage horaire -->
             <Label Text="Plage horaire" Style="{StaticResource TexteNormal}" />
-            <Picker x:Name="pickerHoraire" Title="Choisir une plage horaire">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>08:00 - 10:00</x:String>
-                        <x:String>10:00 - 12:00</x:String>
-                        <x:String>13:00 - 15:00</x:String>
-                        <x:String>15:00 - 17:00</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
-            <Label x:Name="erreurHoraire" Text="Veuillez choisir une plage horaire." Style="{StaticResource MessageErreur}" />
+            <Picker Title="Choisir une plage horaire"
+                    ItemsSource="{Binding PlagesHoraires}"
+                    SelectedItem="{Binding PlageHoraire}" />
+
+            <!-- Message de validation -->
+            <Label Text="{Binding MessageErreur}" Style="{StaticResource MessageErreur}" />
 
             <Button Text="Confirmer la réservation" Style="{StaticResource BoutonPrincipal}"
-                    Margin="0,16,0,0" Clicked="OnConfirmerClicked" />
+                    Margin="0,12,0,0" Command="{Binding ConfirmerCommand}" />
+            <Label Text="Entrez votre nom pour activer le bouton."
+                   FontSize="13" TextColor="Gray" HorizontalOptions="Center" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

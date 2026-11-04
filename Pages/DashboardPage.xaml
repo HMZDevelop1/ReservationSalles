@@ -10,23 +10,25 @@
 
             <Label Text="Réservation de salles" Style="{StaticResource TitrePage}"
                    HorizontalOptions="Center" />
-            <Label Text="Bienvenue ! Consultez les salles et réservez en quelques clics."
+            <Label Text="Consultez les salles et réservez en quelques clics."
                    Style="{StaticResource TexteNormal}" HorizontalTextAlignment="Center" />
 
-            <!-- Deux cartes côte à côte -->
+            <!-- Deux cartes côte à côte (valeurs liées au ViewModel) -->
             <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
                 <Border Grid.Column="0" Style="{StaticResource Carte}">
                     <VerticalStackLayout Spacing="4">
-                        <Label x:Name="labelNbSalles" Text="0" FontSize="40" FontAttributes="Bold"
+                        <Label Text="{Binding NombreSallesDisponibles}" FontSize="40" FontAttributes="Bold"
                                TextColor="{StaticResource CouleurPrincipale}" HorizontalOptions="Center" />
                         <Label Text="Salles disponibles" Style="{StaticResource TexteNormal}"
                                HorizontalOptions="Center" />
+                        <Label Text="{Binding NombreTotalSalles, StringFormat='sur {0} au total'}"
+                               FontSize="13" TextColor="Gray" HorizontalOptions="Center" />
                     </VerticalStackLayout>
                 </Border>
 
                 <Border Grid.Column="1" Style="{StaticResource Carte}">
                     <VerticalStackLayout Spacing="4">
-                        <Label x:Name="labelNbReservations" Text="0" FontSize="40" FontAttributes="Bold"
+                        <Label Text="{Binding NombreReservations}" FontSize="40" FontAttributes="Bold"
                                TextColor="{StaticResource CouleurPrincipale}" HorizontalOptions="Center" />
                         <Label Text="Réservations" Style="{StaticResource TexteNormal}"
                                HorizontalOptions="Center" />
@@ -34,13 +36,11 @@
                 </Border>
             </Grid>
 
-            <!-- Menu de navigation rapide -->
+            <!-- Navigation rapide -->
             <Label Text="Navigation" FontSize="20" FontAttributes="Bold"
                    TextColor="{StaticResource CouleurTexte}" />
             <Button Text="Voir la liste des salles" Style="{StaticResource BoutonPrincipal}"
                     Clicked="OnListeClicked" />
-            <Button Text="Réserver une salle" Style="{StaticResource BoutonSecondaire}"
-                    Clicked="OnReserverClicked" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

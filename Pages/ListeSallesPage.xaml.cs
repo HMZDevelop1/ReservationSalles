@@ -1,26 +1,23 @@
-using ReservationSalles.Models;
-using ReservationSalles.Data;
 using ReservationSalles.ViewModels;
 
 namespace ReservationSalles.Pages;
 
 public partial class ListeSallesPage : ContentPage
 {
-    public ListeSallesPage()
+    public ListeSallesPage(ListeSallesViewModel viewModel)
     {
         InitializeComponent();
-
-        var carnet = new CarnetSalles();
-        listeSalles.ItemsSource = carnet.Salles;
+        BindingContext = viewModel;
     }
 
-    private async void OnDetailsClicked(object sender, EventArgs e)
+    // Quand on revient sur la liste, on enlève la sélection précédente
+    protected override void OnAppearing()
     {
-        // Le bouton sait à quelle salle il appartient grâce au BindingContext
-        Button bouton = (Button)sender;
-        Salle salle = (Salle)bouton.BindingContext;
+        base.OnAppearing();
 
-        // On passe l'identifiant de la salle à la page de détail (paramètre simple)
-        await Shell.Current.GoToAsync($"{nameof(DetailSallePage)}?salleId={salle.Id}");
+        if (BindingContext is ListeSallesViewModel viewModel)
+        {
+            viewModel.SalleSelectionnee = null;
+        }
     }
 }

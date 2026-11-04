@@ -10,28 +10,29 @@
 
             <Image Source="salle.png" HeightRequest="140" HorizontalOptions="Center" />
 
-            <Label x:Name="labelNom" Style="{StaticResource TitrePage}" HorizontalOptions="Center" />
-            <Label x:Name="labelDisponibilite" FontAttributes="Bold" FontSize="18"
+            <Label Text="{Binding Salle.Nom}" Style="{StaticResource TitrePage}"
                    HorizontalOptions="Center" />
+            <Label Text="{Binding Salle.TexteDisponibilite}" FontAttributes="Bold" FontSize="18"
+                   TextColor="{Binding Salle.CouleurDisponibilite}" HorizontalOptions="Center" />
 
             <Border Style="{StaticResource Carte}">
                 <VerticalStackLayout Spacing="8">
-                    <Label Text="Description" FontAttributes="Bold" Style="{StaticResource TexteNormal}" />
-                    <Label x:Name="labelDescription" Style="{StaticResource TexteNormal}" />
-
                     <Label Text="Capacité" FontAttributes="Bold" Style="{StaticResource TexteNormal}" />
-                    <Label x:Name="labelCapacite" Style="{StaticResource TexteNormal}" />
+                    <Label Text="{Binding Salle.TexteCapacite}" Style="{StaticResource TexteNormal}" />
 
                     <Label Text="Localisation" FontAttributes="Bold" Style="{StaticResource TexteNormal}" />
-                    <Label x:Name="labelLocalisation" Style="{StaticResource TexteNormal}" />
+                    <Label Text="{Binding Salle.Localisation}" Style="{StaticResource TexteNormal}" />
 
                     <Label Text="Équipements disponibles" FontAttributes="Bold" Style="{StaticResource TexteNormal}" />
-                    <Label x:Name="labelEquipements" Style="{StaticResource TexteNormal}" />
+                    <Label Text="{Binding EquipementsText}" Style="{StaticResource TexteNormal}" />
                 </VerticalStackLayout>
             </Border>
 
-            <Button x:Name="boutonReserver" Text="Réserver cette salle"
-                    Style="{StaticResource BoutonPrincipal}" Clicked="OnReserverClicked" />
+            <!-- Une salle occupée ne peut pas être réservée -->
+            <Button Text="Réserver cette salle" Style="{StaticResource BoutonPrincipal}"
+                    Command="{Binding ReserverCommand}"
+                    IsEnabled="{Binding Salle.EstDisponible}" />
+
             <Button Text="Retour à la liste" Style="{StaticResource BoutonSecondaire}"
                     Clicked="OnRetourClicked" />
         </VerticalStackLayout>

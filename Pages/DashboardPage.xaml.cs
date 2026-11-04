@@ -1,34 +1,18 @@
-using ReservationSalles.Models;
-using ReservationSalles.Data;
 using ReservationSalles.ViewModels;
 
 namespace ReservationSalles.Pages;
 
 public partial class DashboardPage : ContentPage
 {
-    public DashboardPage()
+    // Le ViewModel est fourni automatiquement (injection de dépendances, voir MauiProgram)
+    public DashboardPage(DashboardViewModel viewModel)
     {
         InitializeComponent();
-    }
-
-    // Appelé chaque fois que la page s'affiche : les chiffres sont toujours à jour
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        var carnet = new CarnetSalles();
-        int nbDisponibles = carnet.Salles.Count(s => s.EstDisponible);
-        labelNbSalles.Text = nbDisponibles.ToString();
-        labelNbReservations.Text = carnet.Reservations.Count.ToString();
+        BindingContext = viewModel;
     }
 
     private async void OnListeClicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("//ListeSallesPage");
-    }
-
-    private async void OnReserverClicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("//ReservationPage");
     }
 }

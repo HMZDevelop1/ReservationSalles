@@ -5,11 +5,19 @@
              Title="Liste des salles"
              BackgroundColor="{StaticResource CouleurFond}">
 
-    <Grid RowDefinitions="Auto,*" Padding="16" RowSpacing="10">
+    <Grid RowDefinitions="Auto,*,Auto" Padding="16" RowSpacing="10">
 
-        <Label Grid.Row="0" Text="Nos salles" Style="{StaticResource TitrePage}" />
+        <VerticalStackLayout Grid.Row="0" Spacing="2">
+            <Label Text="Nos salles" Style="{StaticResource TitrePage}" />
+            <Label Text="Touchez une salle, puis appuyez sur « Voir les détails »."
+                   FontSize="14" TextColor="Gray" />
+        </VerticalStackLayout>
 
-        <CollectionView x:Name="listeSalles" Grid.Row="1" SelectionMode="None">
+        <!-- La salle touchée est enregistrée dans SalleSelectionnee du ViewModel -->
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding Salles}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SalleSelectionnee}">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
             </CollectionView.ItemsLayout>
@@ -31,13 +39,16 @@
                                 <Label Text="{Binding Localisation}" Style="{StaticResource TexteNormal}" />
                                 <Label Text="{Binding TexteDisponibilite}" FontAttributes="Bold"
                                        TextColor="{Binding CouleurDisponibilite}" />
-                                <Button Text="Voir les détails" Style="{StaticResource BoutonSecondaire}"
-                                        Clicked="OnDetailsClicked" />
                             </VerticalStackLayout>
                         </Grid>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
+        <!-- Actif seulement quand une salle est sélectionnée -->
+        <Button Grid.Row="2" Text="Voir les détails"
+                Style="{StaticResource BoutonPrincipal}"
+                Command="{Binding VoirDetailCommand}" />
     </Grid>
 </ContentPage>
